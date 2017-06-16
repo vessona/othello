@@ -1,0 +1,9 @@
+table, td {
+				border:1px solid black;
+				table-layout: fixed;
+				border-collapse: collapse;
+			}
+			td{
+				width: 30;
+				height: 30;
+			}
