@@ -5,41 +5,25 @@
 		<title></title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script>
-			var table = new Array();
+			var table = new Array(); //creating array of cells
 			for( i = 0; i<8; i++)
-				table[i] = new Array();
+				table[i] = new Array(); //making it multidimensional
 			var onClStr='';
-			var white=0;
-			var black=0;
+			var white=0; //white's score
+			var black=0; //black's score
 			
 			$(document).ready(function(){
-				for( i = 0; i<8; i++)
+				for( i = 0; i<8; i++) //setting up starting position
 					for( j = 0; j<8; j++)
 						table[i][j]='blank';
-				table[3][3]='white';
+				table[3][3]='white'; 
 				table[4][4]='white';
 				table[3][4]='black';
 				table[4][3]='black';
 				$("td").css("background-color", "green");
-				draw();
+				draw(); 
 			});
 			
-			
-			
-			
-			function start()
-			{
-				for( i = 0; i<8; i++)
-					for( j = 0; j<8; j++)
-						table[i][j]='blank';
-				table[4][4]='white';
-				table[5][5]='white';
-				table[4][5]='black';
-				table[5][4]='black';
-				
-				draw();
-				
-			}
 			
 			function draw()
 			{
