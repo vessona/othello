@@ -11,6 +11,7 @@
 			var onClStr='';
 			var white=0; //white's score
 			var black=0; //black's score
+			var turn = 'white';
 			
 			$(document).ready(function(){
 				for( i = 0; i<8; i++) //setting up starting position
@@ -36,7 +37,8 @@
 					{
 						if(table[i][j] == 'blank')
 						{
-							//swap()	
+							if(swap(turn,false,i,j))
+								$("#"+(i)+(j)).click(function() {$(this).text("hey");});
 						}
 						else
 					  	{
@@ -57,13 +59,14 @@
 			function swap(current, move, i, j)
 			{
 				var result = false;
+				
 				if(i>1 && j>1)
 				{
 					if(table[i-1][j-1]!='blank'&&table[i-1][j-1]!=current)
 					{
 						k = i - 2;
 						l = j - 2;
-						while(k>0 && l>0 $$ table[k][l] != 'blank' $$ table[k][l] != current)
+						while(k>0 && l>0 && table[k][l] != 'blank' && table[k][l] != current)
 						{
 							k--;
 							l--;
@@ -135,7 +138,90 @@
 							}
 					}
 				}
-				//and so on.........
+				if(i>1 && j<7)
+				{
+					if(table[i-1][j+1] != 'blank' && table[i-1][j+1] != current)
+					{
+						k = i - 2;
+						l = j + 2;
+						while(k>0 && l<7 && table[k][l] != 'blank' && table[k][l] != current)
+						{
+							k--;
+							l++;
+						}
+						if(table[k][l] == current)
+							while(k<i & l>j)
+							{
+								k++;
+								l--;
+								if(move)
+									table[k][l]=current;
+								result=true;
+							}
+					}
+				}
+				if(i<6)
+				{
+					if(table[i+1][j] != 'blank' && table[i+1][j] != current)
+					{
+						k=i+2;
+						while(k<7 && table[k][j] != 'clear' && table[k][j] != current)
+							k++;
+						if(table[k][j] == current)
+							while(k>i)
+							{
+								k--;
+								if(move)
+									table[k][j] = current;
+								result = true;
+							}
+					}
+				}
+				if(i<6 && j<6)
+				{
+					if(table[i+1][j+1] != 'blank' && table[i+1][j+1] != current)
+					{
+						k = i+2;
+						l = j+2;
+						while(k<7 && l<7 && table[k][l] !='blank' && table[k][l] != current)
+						{
+							k++;
+							l++;
+						}
+						if(table[k][l] == current) 
+							while(k>i && l>j)
+							{
+								k--;
+								l--;
+								if(move)
+									table[k][l] = current;
+								result = true;
+							}
+					}
+				}
+				if(j>1)
+				{
+					if(table[i][j-1]!='blank' && table[i][j-1] != current)
+					{
+						l = j-2;
+						while(l>0 && table[i][l] != 'blank' && table[i][l] != current)
+						{
+							l--;
+						}
+						if(table[i][l] == current)
+							while(l<j)
+							{
+								l++;
+								if(move)
+									table[i][l] = current;
+								result = true;
+							}
+					}
+				}
+				if(result && move)
+					table[i][j] = color;
+					
+				return result;
 			}
 			
 			
