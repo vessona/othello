@@ -1,12 +1,16 @@
 
   .navbar-nav  li a:hover {
       color: #898F89 !important;
+     
   }
-body{
-	
-	
-}
+
+body { padding-top: 70px; }
  .bg-2 { 
       background-color: #898F89; /* Dark Blue */
       color: #ffffff;
+    
+  }
+  
+  .bg-2 p{
+  	text-align: justify;
   }
