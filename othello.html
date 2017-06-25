@@ -6,13 +6,40 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="othello.js"></script>
 		<link rel = "stylesheet" type = "text/css" href = "othello.css" />	
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  		<link rel="stylesheet" href="style.css" type="text/css" >
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<table>
+		<nav class="navbar navbar-default">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>                        
+		      </button>
+		      <a class="navbar-brand" href="#">Othello Game</a>
+		    </div>
+		    <div class="collapse navbar-collapse" id="myNavbar">
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="#">HOW TO PLAY</a></li>
+		        <li><a href="#">TOP PLAYERS</a></li>
+		        <li><a href="#">ABOUT THE PROJECT</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		</nav>
+		
+		<div class="container-fluid bg-1 text-center ">
+		<div class="table-responsive">
+		<table class="table">
 			<tr><td id="00" ></td>
-		    <td id="01" ></td>
+		    <td id="01"  ></td>
 		    <td id="02" ></td>
-		    <td id="03" ></td>
+		    <td id="03"></td>
 		    <td id="04" ></td>
 		    <td id="05" ></td>
 		    <td id="06" ></td>
@@ -21,11 +48,11 @@
 		    <td id="11" ></td>
 		    <td id="12" ></td>
 		    <td id="13" ></td>
-		    <td id="14" ></td>
+		    <td id="14"></td>
 		    <td id="15" ></td>
 		    <td id="16" ></td>
 		    <td id="17" ></td></tr>
-		  <tr><td id="20" ></td>
+		  <tr><td id="20"></td>
 		    <td id="21" ></td>
 		    <td id="22" ></td>
 		    <td id="23" ></td>
@@ -33,7 +60,7 @@
 		    <td id="25" ></td>
 		    <td id="26" ></td>
 		    <td id="27" ></td></tr>
-		  <tr><td id="30" ></td>
+		  <tr><td id="30"></td>
 		    <td id="31" ></td>
 		    <td id="32" ></td>
 		    <td id="33" ></td>
@@ -49,30 +76,44 @@
 		    <td id="45" ></td>
 		    <td id="46" ></td>
 		    <td id="47" ></td></tr>
-		  <tr><td id="50" ></td>
+		  <tr><td id="50"  ></td>
 		    <td id="51" ></td>
 		    <td id="52" ></td>
 		    <td id="53" ></td>
 		    <td id="54" ></td>
-		    <td id="55" ></td>
+		    <td id="55"></td>
 		    <td id="56" ></td>
 		    <td id="57" ></td></tr>
 		  <tr><td id="60" ></td>
-		    <td id="61" ></td>
-		    <td id="62" ></td>
+		    <td id="61"></td>
+		    <td id="62"></td>
 		    <td id="63" ></td>
 		    <td id="64" ></td>
 		    <td id="65" ></td>
 		    <td id="66" ></td>
 		    <td id="67" ></td></tr>
-		  <tr><td id="70" ></td>
-		    <td id="71" ></td>
+		  <tr><td id="70"></td>
+		    <td id="71"  ></td>
 		    <td id="72" ></td>
-		    <td id="73" ></td>
+		    <td id="73"  ></td>
 		    <td id="74" ></td>
 		    <td id="75" ></td>
 		    <td id="76" ></td>
 		    <td id="77" ></td></tr>
-		</table>	
+		</table>
+		</div>
+			
+		</div>
+		
+		
+		<div class="container-fluid bg-2 text-center">
+  			<h3 class="margin">What Am I?</h3>
+  			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+  			<a href="#" class="btn btn-default btn-lg">
+    		<span class="glyphicon glyphicon-search"></span> Search
+  			</a>
+		</div>
+		
+	
 	</body>
 </html>

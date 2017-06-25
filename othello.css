@@ -1,9 +1,38 @@
+
+			
+table {
+    margin: 0px auto;
+    float: none;
+    
+}
+
+td {
+  width: 5%;
+  position: relative;
+  
+}
+td:after {
+  content: '';
+  display: block;
+  margin-top: 100%;
+ 
+}
+.table-responsive
+{
+	
+	width: 40%;
+	 margin: 0px auto;
+    float: none;
+}
 table, td {
-				border:1px solid black;
-				table-layout: fixed;
+				border:1px solid #453C3C;
+				
 				border-collapse: collapse;
+				
 			}
-			td{
-				width: 30;
-				height: 30;
-			}
+
+
+td:hover {
+  outline:1px solid black;
+ 
+}

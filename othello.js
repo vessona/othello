@@ -1,9 +1,6 @@
-var table = new Array();
-for(i = 0; i < 8; i++) 
-	table[i] = new Array();
-var turn = 'black';
-var white = 0;
-var black = 0;
+var table = [[],[],[],[],[],[],[],[]]; //array for table 8x8
+var turn = 'black'; //black plays first
+//black score
 $(document).ready(function(){
 	for( i = 0; i<8; i++) //setting up starting position
 		for( j = 0; j<8; j++)
@@ -12,76 +9,73 @@ $(document).ready(function(){
 	table[4][4]='white';
 	table[3][4]='black';
 	table[4][3]='black';
-	$("td").css("background-color", "green");
-	draw(); 
+	draw(); //filling the color
+	 $("td").click(function () {
+        var ar = Array.from(event.target.id);
+        if(check(turn, false,parseInt(ar[0]), parseInt(ar[1])))
+            play(parseInt(ar[0]),parseInt(ar[1]));
+        });
 });
 
 function draw()
 {
-	for(i = 0; i < 8; i++)
-        for(j = 0; j < 8; j++)
+	$("table").css("background-color", "#34B233");
+	for(var i = 0; i < 8; i++)
+        for(var j = 0; j < 8; j++)
         {
-			clickStr = '';
-          	if(table[i][j] == 'blank')
-          	{
-            	if(swap(turn, false,i, j))
-             	clickStr = 'onclick="play('+i+','+j+')"';
-          	}
-          	else
-          	{
             	if(table[i][j] == 'white')
             	{
-            		white++;
-            		$("#"+i+j).css("background-color", "white");
+            		$("#"+i+j).css("background-color", "white").css("transition","all 0.8s ease");
             	} 
-            	else 
+            	else if(table[i][j]=='black')
             	{
-            		$("#"+i+j).css("background-color", "black");
-            		black++;}
-          		}
-  			$("#"+i+j).html('<img width=30 height=30 '+clickStr+'>');
+            		$("#"+i+j).css("background-color", "black").css("transition","all 0.8s ease");
+            	}
+            	
         }
+
 }
 
 
-function swap( current, action,i, j)
+function check( current, action,i, j)
 {
-	result = 0;
-    if(table[i][j] != 'blank') 
-    	return 0;
+	result = 0; 
+    if(table[i][j] != 'blank') // if current cell occupied do nothing 
+    	return 0; 
 
     if(i > 1 && j > 1)
     	{
-        	if(table[i - 1][j - 1] != 'blank' && table[i - 1][j - 1] != current)
+        	if(table[i - 1][j - 1] != 'blank' && table[i - 1][j - 1] != current) //if left top cell is not empty or not of the current players color
         	{
           		k = i - 2;
           		l = j - 2;
-          		while(k > 0 && l > 0 && table[k][l] != 'blank' && table[k][l] != current)
+          		while(k > 0 && l > 0 && table[k][l] != 'blank' && table[k][l] != current) //moving to the left top diagonal untill empty or current color cell
           		{
             		k--;
             		l--;
           		}
-          		if(table[k][l] == current) while(k < i && l < j)
-          		{
-            		k++;
-            		l++;
-            		if(action)
-              			table[k][l] = current;
-            		result++;
-          		}
+          		if(table[k][l] == current) // if we went to the current players cell 
+          			while(k < i && l < j) //color all cells back we went thru
+          			{
+            			k++;	
+            			l++;
+            			if(action)
+              				table[k][l] = current;
+            			result++;
+          			}
         	}
 		}
 
     if(i > 1)
 		{
-        	if(table[i - 1][j] != 'blank' && table[i - 1][j] != current)
-        	{
-          		k = i - 2;
-          		while(k > 0 && table[k][j] != 'blank' && table[k][j] != current)
+        	if(table[i - 1][j] != 'blank' && table[i - 1][j] != current) //if left cell is not empty or current color
+         	{
+          		k = i - 2; ///?
+          		while(k > 0 && table[k][j] != 'blank' && table[k][j] != current) //going to the left
           		{
             		k--;
           		}
-          		if(table[k][j] == current) while(k < i)
+          		if(table[k][j] == current) while(k < i) //if current color all the cells back
           		{
             		k++;
             		if(action)
@@ -216,8 +210,10 @@ function swap( current, action,i, j)
 
 function play(i, j)
 {
+	var white = 0; //white score
+var black = 0; 
     step = 0;
-    if(swap(turn, true, i, j))
+    if(check(turn, true, i, j))
     {
     	if(turn == 'white') 
     		turn = 'black';
@@ -230,7 +226,7 @@ function play(i, j)
         {
         	for(n = 0; n < 8; n++)
           	{
-            	if(swap(turn, false,m, n) > 0) step++;
+            	if(check(turn, false,m, n) > 0) step++;
           	}
         }
         if(step == 0)
@@ -244,11 +240,28 @@ function play(i, j)
           	
           	for(m = 0; m < 8; m++)
             	for(n = 0; n < 8; n++)
-              		if(swap(turn, false,m, n)) 
+              		if(check(turn, false,m, n)) 
               			step++;
           	if(step == 0)
           	{
            		alert("Game Over!");
+           		
+           		for(var n =0; n<8; n++)
+           		{
+					for(var p =0; p<8; p++ )
+					{
+						if(table[n][p]=='white')
+						white++;
+						else
+						black++;
+					}
+				}
+				if(white>black)
+				alert(white+"white won"+black);
+				else if(black>white)
+				alert(white+"black won"+black);
+				else
+				alert("tie");
           	}
           	else
           	{
@@ -260,3 +273,5 @@ function play(i, j)
         }
 	}   
 }
+
+
