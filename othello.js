@@ -1,5 +1,10 @@
 var table = [[],[],[],[],[],[],[],[]]; //array for table 8x8
 var turn = 'black'; //black plays first
+function setNames(){
+	name1 = $("#fpl").val();
+    name2 = $("#spl").val();
+    alert("names are set");
+}
 $(document).ready(function(){
 	for( i = 0; i<8; i++) //setting up starting position
 		for( j = 0; j<8; j++)
@@ -38,10 +43,10 @@ function draw()
 
 function check( current, action,i, j)
 {
-	result = 0; 
-    if(table[i][j] != 'blank') // if current cell occupied do nothing 
-    	return 0; 
-
+	result = false; 
+   
+	if(table[i][j] == 'blank'){
+	
     if(i > 1)
 		{
         	if(table[i - 1][j] != 'blank' && table[i - 1][j] != current) //if left cell is not empty or current color
@@ -56,7 +61,7 @@ function check( current, action,i, j)
             		k++;
             		if(action)
               			table[k][j] = current;
-            		result++;
+            		result=true;
           		}
         	}
         	
@@ -78,7 +83,7 @@ function check( current, action,i, j)
 	            			l++;
 	            			if(action)
 	              				table[k][l] = current;
-	            			result++;
+	            			result=true;
 	          			}
 	        	}
 			}
@@ -100,7 +105,7 @@ function check( current, action,i, j)
 	            		l--;
 	            		if(action) 
 	              			table[k][l] = current;
-	            		result++;
+	            		result=true;
 	          		}
 	        	}
 			}
@@ -118,7 +123,7 @@ function check( current, action,i, j)
             		k--;
             		if(action) 
               			table[k][j] = current;
-            		result++;
+            		result=true;
           		}
         	}
         	
@@ -139,7 +144,7 @@ function check( current, action,i, j)
 	            		l--;
 	            		if(action) 
 	              			table[k][l] = current;
-	            		result++;
+	            		result=true;
 	          		}
 	        	}
 			}
@@ -158,7 +163,7 @@ function check( current, action,i, j)
             		l++;
             		if(action) 
               			table[i][l] = current;
-            		result++;
+            		result=true;
           		}
         	}
         	if(i < 6)
@@ -178,7 +183,7 @@ function check( current, action,i, j)
 	            		l++;
 	            		if(action)
 	              			table[k][l] = current;
-	            		result++;
+	            		result=true;
 	          		}
 	       	 	}
 			}
@@ -197,12 +202,12 @@ function check( current, action,i, j)
 	            		l--;
 	            		if(action) 
 	              			table[i][l] = current;
-	            		result++;
+	            		result=true;
 	          		}
 	        	}
 	      }
-	if(result && action) table[i][j] = current;
-
+	if(result && action) table[i][j] = current;	
+	}
     return result;
 }
 
@@ -210,18 +215,13 @@ function check( current, action,i, j)
 
 function play(i, j)
 {
-	var white = 0; //white score
-	var black = 0; //black score
-    step = 0; //moves available
+	var player1 = 0; //white score
+	var player2 = 0; //black score
     if(check(turn, true, i, j))
-    {
-    	iteration(i, j); 
-            		
-        if(step == 0)
+    {    		
+        if(!iteration(i, j))
         {	
-        	iteration(i, j); //we need to do it twice - one for black and one for white to see if there are still moves available
-        	
-          	if(step == 0) //if none moves availbale for both palyers -- game over
+          	if(!iteration(i, j)) 
           	{
            		alert("Game Over!");
            		
@@ -229,17 +229,33 @@ function play(i, j)
 					for(var p =0; p<8; p++ )
 					{
 						if(table[n][p]=='white')
-						white++;
+							player1++;
 						else
-						black++;
+							player2++;
 					}
 					
-				if(white>black)
-					alert(white+"white won"+black);
-				else if(black>white)
-					alert(white+"black won"+black);
+				if(player1>player2)
+					alert(player1+"white won"+player2);
+				else if(player2>player1)
+					alert(player1+"black won"+player2);
 				else
 					alert("tie");
+					
+				alert(name1);
+			       $.post("process.php",
+			            {
+			                player1Name: name1,
+			                score1: player1,
+			                player2Name: name2,
+			                score2: player2,
+			            }
+			            ,function(dataFromtheServer) {
+			                alert(dataFromtheServer);
+			            });
+
+
+
+
           	}
           	else //if moves available for one of the players --- another one passes
           	{
@@ -254,6 +270,7 @@ function play(i, j)
 
 function iteration(i, j)
 {
+	var res = false;
 	if(turn == 'white') 
     		turn = 'black';
         else 
@@ -264,7 +281,9 @@ function iteration(i, j)
         for(m = 0; m < 8; m++)
         	for(n = 0; n < 8; n++)
             	if(check(turn, false,m, n) > 0) 
-            		step++; //counting available moves
+            		res = true;
+        
+        return res;
 }
 
 
