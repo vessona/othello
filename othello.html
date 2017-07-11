@@ -5,6 +5,20 @@
 		<title></title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="othello.js"></script>
+		
+		
+		<script>
+			  function ajaxWay() {
+       $.post("top.php",
+            {
+                theValueFromUser: "hello"
+            }
+            ,function(dataFromtheServer) {
+                $("#top").html(dataFromtheServer);
+            });
+   }
+
+		</script>
 		<link rel = "stylesheet" type = "text/css" href = "othello.css" />	
 		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -117,7 +131,11 @@
     		<span ></span> WikiHow
   			</a>
 		</div>
-		
+		<div class="container-fluid bg-1 text-center">
+  			<h3 class="margin">Top ten</h3>
+  			<button onclick="ajaxWay()">GET TOP 10</button>
+  			<div id="top"></div>
+		</div>
 	
 	</body>
 </html>

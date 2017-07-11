@@ -6,6 +6,7 @@ function setNames(){
     alert("names are set");
 }
 $(document).ready(function(){
+		
 	for( i = 0; i<8; i++) //setting up starting position
 		for( j = 0; j<8; j++)
 			table[i][j]='blank';
@@ -19,6 +20,7 @@ $(document).ready(function(){
         if(check(turn, false,parseInt(ar[0]), parseInt(ar[1])))
             play(parseInt(ar[0]),parseInt(ar[1]));
         });
+        
 });
 
 function draw()
@@ -37,7 +39,9 @@ function draw()
             	}
             	
         }
-
+ /* $.post("top.php", {hello:name1},function(data2) {
+			              $("#top").html(data2);
+			            });*/
 }
 
 
@@ -235,13 +239,13 @@ function play(i, j)
 					}
 					
 				if(player1>player2)
-					alert(player1+"white won"+player2);
+					alert(player1+""+name1+" -- white won"+player2);
 				else if(player2>player1)
-					alert(player1+"black won"+player2);
+					alert(player1+""+name2+" -- black won"+player2);
 				else
 					alert("tie");
 					
-				alert(name1);
+				
 			       $.post("process.php",
 			            {
 			                player1Name: name1,
@@ -252,8 +256,10 @@ function play(i, j)
 			            ,function(dataFromtheServer) {
 			                alert(dataFromtheServer);
 			            });
+			            
+			      
 
-
+			
 
 
           	}
@@ -285,5 +291,6 @@ function iteration(i, j)
         
         return res;
 }
+
 
 
