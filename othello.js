@@ -1,9 +1,11 @@
 var table = [[],[],[],[],[],[],[],[]]; //array for table 8x8
 var turn = 'black'; //black plays first
+var namesCheck = false;
 function setNames(){
 	name1 = $("#fpl").val();
     name2 = $("#spl").val();
     alert("names are set");
+    namesCheck=true;
 }
 $(document).ready(function(){
 		
@@ -17,8 +19,10 @@ $(document).ready(function(){
 	draw(); //filling the color
 	 $("td").click(function () {
         var ar = Array.from(event.target.id);
-        if(check(turn, false,parseInt(ar[0]), parseInt(ar[1])))
+        if(namesCheck){
+			 if(check(turn, false,parseInt(ar[0]), parseInt(ar[1])))
             play(parseInt(ar[0]),parseInt(ar[1]));
+		}
         });
         
 });
